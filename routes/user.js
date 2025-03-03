@@ -9,6 +9,15 @@ const userRouter = Router();
 userRouter.post("/signup",async(req,res)=>{
     const {email,password ,firstName,lastName} = req.body;
 
+    if (!email || !password || !firstName || !lastName) {
+        return res.status(400).json({ message: "All fields are required" });
+    }
+    
+    const existingUser = await userModel.findOne({ email });
+    if (existingUser) {
+        return res.status(400).json({ message: "Email already registered" });
+    }
+
     await userModel.create({
         email:email,
         password:password,
