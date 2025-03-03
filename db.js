@@ -11,8 +11,17 @@ const userSchema = new Schema({
     lastName : String
 });
 
+const postSchema = new Schema({
+    titel : String,
+    description : String,
+    imageUrl : String,
+    creatorId : ObjetId
+});
+
 const userModel = mongoose.model("user",userSchema);
+const postModel = mongoose.model("post",postSchema);
 
 module.exports = {
-    userModel
+    userModel,
+    postModel
 }
